@@ -38,8 +38,8 @@ export default function HomeScreen() {
 			const query = searchQuery.toLowerCase();
 			filtered = filtered.filter((country) => {
 				const officialName = country.name.official.toLowerCase();
-				const commonName = country.name.common?.toLowerCase() || "";
-				const capital = country.capital?.[0]?.toLowerCase() || "";
+				const commonName = country.name.common.toLowerCase() || "";
+				const capital = country.capital[0].toLowerCase() || "";
 
 				return (
 					officialName.includes(query) ||
