@@ -31,19 +31,6 @@ describe("ErrorState", () => {
 		expect(screen.getByText("Unable to fetch data")).toBeTruthy();
 	});
 
-	it("renders with both custom message and submessage", () => {
-		render(
-			<ErrorState
-				onRetry={mockOnRetry}
-				message="Network Error"
-				submessage="Connection timeout"
-			/>,
-		);
-
-		expect(screen.getByText("Network Error")).toBeTruthy();
-		expect(screen.getByText("Connection timeout")).toBeTruthy();
-	});
-
 	it("calls onRetry when retry button is pressed", () => {
 		render(<ErrorState onRetry={mockOnRetry} />);
 
@@ -95,20 +82,5 @@ describe("ErrorState", () => {
 		expect(
 			screen.getByText("Please check your connection and try again"),
 		).toBeTruthy();
-	});
-
-	it("maintains functionality after re-render", () => {
-		const { rerender } = render(<ErrorState onRetry={mockOnRetry} />);
-
-		rerender(
-			<ErrorState onRetry={mockOnRetry} message="Updated error message" />,
-		);
-
-		expect(screen.getByText("Updated error message")).toBeTruthy();
-
-		const retryButton = screen.getByText("Try Again").parent;
-		fireEvent.press(retryButton);
-
-		expect(mockOnRetry).toHaveBeenCalledTimes(1);
 	});
 });

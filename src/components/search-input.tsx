@@ -28,25 +28,21 @@ export function SearchInput({
 				style={[
 					styles.inputContainer,
 					isFocused && {
-						borderColor: theme.colors.accent.primary,
+						borderColor: theme.colors.accent.blue,
 						...theme.shadows.sm,
 					},
 				]}
 			>
-				{/* Search Icon */}
 				<Ionicons
 					name="search"
 					size={20}
 					testID="search-icon"
 					color={
-						isFocused
-							? theme.colors.accent.primary
-							: theme.colors.text.secondary
+						isFocused ? theme.colors.accent.blue : theme.colors.text.secondary
 					}
 					style={styles.searchIcon}
 				/>
 
-				{/* Text Input */}
 				<TextInput
 					value={value}
 					onChangeText={onChangeText}
@@ -60,7 +56,6 @@ export function SearchInput({
 					onBlur={() => setIsFocused(false)}
 				/>
 
-				{/* Clear Button */}
 				{value.length > 0 && (
 					<Pressable
 						onPress={handleClear}

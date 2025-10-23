@@ -126,7 +126,7 @@ describe("HomeScreen", () => {
 			renderWithProvider(<HomeScreen />);
 
 			expect(screen.getByText("Countries")).toBeTruthy();
-			expect(screen.getByText("Explore the world")).toBeTruthy();
+			expect(screen.getByText("Explore Europe")).toBeTruthy();
 		});
 
 		it("displays country count badge", () => {
@@ -222,7 +222,9 @@ describe("HomeScreen", () => {
 			fireEvent.changeText(searchInput, "XYZ123");
 
 			expect(screen.getByText("No countries found")).toBeTruthy();
-			expect(screen.getByText("Try a different search term")).toBeTruthy();
+			expect(
+				screen.getByText("Try searching with a different term"),
+			).toBeTruthy();
 		});
 
 		it("filters by official name", () => {
@@ -255,7 +257,9 @@ describe("HomeScreen", () => {
 			fireEvent.changeText(searchInput, "NonExistentCountry");
 
 			expect(screen.getByText("No countries found")).toBeTruthy();
-			expect(screen.getByText("Try a different search term")).toBeTruthy();
+			expect(
+				screen.getByText("Try searching with a different term"),
+			).toBeTruthy();
 
 			const searchIcons = screen.getAllByTestId("icon-search");
 			expect(searchIcons.length).toBeGreaterThan(0);

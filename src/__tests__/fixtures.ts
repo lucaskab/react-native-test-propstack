@@ -1,10 +1,5 @@
 import type { Country } from "@/@types/countries";
 
-/**
- * Mock European countries data for testing
- * These fixtures represent a typical API response from the countries endpoint
- */
-
 export const mockGermany: Country = {
 	id: "1",
 	region: "Europe",
@@ -89,28 +84,14 @@ export const mockItaly: Country = {
 	},
 };
 
-/**
- * Sorted array of European countries (alphabetically by common name)
- */
 export const mockEuropeanCountries: Country[] = [
 	mockFrance,
 	mockGermany,
 	mockItaly,
 ];
 
-/**
- * Unsorted version of European countries for testing sorting functionality
- */
 export const mockUnsortedCountries: Country[] = [
 	mockGermany,
 	mockItaly,
 	mockFrance,
 ];
-
-/**
- * Mock country without capital for testing edge cases
- */
-export const mockCountryNoCapital: Country = {
-	...mockGermany,
-	capital: [],
-};

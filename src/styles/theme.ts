@@ -20,9 +20,15 @@ export const lightTheme = {
 			end: "#f3e8ff",
 		},
 		accent: {
-			primary: "#3b82f6",
-			secondary: "#4f46e5",
+			blue: "#3b82f6",
 			indigo: "#6366f1",
+			purple: "#a855f7",
+			violet: "#8b5cf6",
+			pink: "#ec4899",
+			red: "#ef4444",
+			orange: "#f97316",
+			amber: "#f59e0b",
+			green: "#10b981",
 		},
 		badge: {
 			background: "#e0e7ff",
@@ -30,6 +36,17 @@ export const lightTheme = {
 		},
 		card: {
 			background: "rgba(255, 255, 255, 0.95)",
+		},
+		white: "#ffffff",
+		black: "#000000",
+		overlay: {
+			dark: "rgba(0, 0, 0, 0.6)",
+			light: "rgba(255, 255, 255, 0.2)",
+			subtle: "rgba(255, 255, 255, 0.4)",
+		},
+		skeleton: {
+			start: "#d1d5db",
+			end: "#9ca3af",
 		},
 	},
 	spacing: {
@@ -69,6 +86,27 @@ export const lightTheme = {
 			shadowOpacity: 0.05,
 			shadowRadius: 2,
 			elevation: 1,
+		},
+		md: {
+			shadowColor: "#000",
+			shadowOffset: { width: 0, height: 4 },
+			shadowOpacity: 0.2,
+			shadowRadius: 8,
+			elevation: 4,
+		},
+		lg: {
+			shadowColor: "#000",
+			shadowOffset: { width: 0, height: 8 },
+			shadowOpacity: 0.3,
+			shadowRadius: 12,
+			elevation: 8,
+		},
+		floatingIcon: {
+			shadowColor: "#000",
+			shadowOffset: { width: 0, height: 4 },
+			shadowOpacity: 0.3,
+			shadowRadius: 8,
+			elevation: 6,
 		},
 	},
 	typography: {
@@ -111,9 +149,15 @@ export const darkTheme = {
 			end: "#312e81",
 		},
 		accent: {
-			primary: "#60a5fa",
-			secondary: "#818cf8",
-			indigo: "#6366f1",
+			blue: "#60a5fa",
+			indigo: "#818cf8",
+			purple: "#c084fc",
+			violet: "#a78bfa",
+			pink: "#f472b6",
+			red: "#dc2626",
+			orange: "#ea580c",
+			amber: "#fbbf24",
+			green: "#34d399",
 		},
 		badge: {
 			background: "#312e81",
@@ -121,6 +165,17 @@ export const darkTheme = {
 		},
 		card: {
 			background: "rgba(31, 41, 55, 0.95)",
+		},
+		white: "#ffffff",
+		black: "#000000",
+		overlay: {
+			dark: "rgba(0, 0, 0, 0.8)",
+			light: "rgba(0, 0, 0, 0.3)",
+			subtle: "rgba(55, 65, 81, 0.8)",
+		},
+		skeleton: {
+			start: "#4b5563",
+			end: "#6b7280",
 		},
 	},
 	spacing: {
@@ -160,6 +215,27 @@ export const darkTheme = {
 			shadowOpacity: 0.2,
 			shadowRadius: 2,
 			elevation: 1,
+		},
+		md: {
+			shadowColor: "#000",
+			shadowOffset: { width: 0, height: 4 },
+			shadowOpacity: 0.3,
+			shadowRadius: 8,
+			elevation: 4,
+		},
+		lg: {
+			shadowColor: "#000",
+			shadowOffset: { width: 0, height: 8 },
+			shadowOpacity: 0.4,
+			shadowRadius: 12,
+			elevation: 8,
+		},
+		floatingIcon: {
+			shadowColor: "#000",
+			shadowOffset: { width: 0, height: 4 },
+			shadowOpacity: 0.4,
+			shadowRadius: 8,
+			elevation: 6,
 		},
 	},
 	typography: {

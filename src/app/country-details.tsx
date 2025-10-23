@@ -54,7 +54,7 @@ export default function CountryDetailsScreen() {
 							style={styles.flagImage}
 						/>
 						<LinearGradient
-							colors={["transparent", "rgba(0,0,0,0.6)"]}
+							colors={["transparent", theme.colors.overlay.dark]}
 							style={styles.flagOverlay}
 						/>
 					</View>
@@ -66,7 +66,11 @@ export default function CountryDetailsScreen() {
 								style={styles.backButton}
 								hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
 							>
-								<Ionicons name="arrow-back" size={24} color="white" />
+								<Ionicons
+									name="arrow-back"
+									size={24}
+									color={theme.colors.white}
+								/>
 							</Pressable>
 						</Animated.View>
 					</SafeAreaView>
@@ -77,11 +81,7 @@ export default function CountryDetailsScreen() {
 					>
 						<Text style={styles.countryName}>{country.name.common}</Text>
 						<View style={styles.capitalRow}>
-							<Ionicons
-								name="location"
-								size={18}
-								color="rgba(255,255,255,0.9)"
-							/>
+							<Ionicons name="location" size={18} color={theme.colors.white} />
 							<Text style={styles.capitalText}>{capital}</Text>
 						</View>
 					</Animated.View>
@@ -93,10 +93,7 @@ export default function CountryDetailsScreen() {
 						entering={FadeInDown.delay(400).springify()}
 					>
 						<LinearGradient
-							colors={[
-								theme.colors.accent.primary,
-								theme.colors.accent.secondary,
-							]}
+							colors={[theme.colors.accent.blue, theme.colors.accent.indigo]}
 							start={{ x: 0, y: 0 }}
 							end={{ x: 1, y: 1 }}
 							style={styles.iconContainer}
@@ -114,12 +111,12 @@ export default function CountryDetailsScreen() {
 						entering={FadeInDown.delay(500).springify()}
 					>
 						<LinearGradient
-							colors={["#10B981", "#059669"]}
+							colors={[theme.colors.accent.green, "#059669"]}
 							start={{ x: 0, y: 0 }}
 							end={{ x: 1, y: 1 }}
 							style={styles.iconContainer}
 						>
-							<Ionicons name="map" size={24} color="white" />
+							<Ionicons name="map" size={24} color={theme.colors.white} />
 						</LinearGradient>
 						<View style={styles.detailContent}>
 							<Text style={styles.detailLabel}>Area</Text>
@@ -132,12 +129,12 @@ export default function CountryDetailsScreen() {
 						entering={FadeInDown.delay(600).springify()}
 					>
 						<LinearGradient
-							colors={["#8B5CF6", "#7C3AED"]}
+							colors={[theme.colors.accent.violet, "#7c3aed"]}
 							start={{ x: 0, y: 0 }}
 							end={{ x: 1, y: 1 }}
 							style={styles.iconContainer}
 						>
-							<Ionicons name="cash" size={24} color="white" />
+							<Ionicons name="cash" size={24} color={theme.colors.white} />
 						</LinearGradient>
 						<View style={styles.detailContent}>
 							<Text style={styles.detailLabel}>Currency</Text>
@@ -150,12 +147,12 @@ export default function CountryDetailsScreen() {
 						entering={FadeInDown.delay(700).springify()}
 					>
 						<LinearGradient
-							colors={["#F59E0B", "#D97706"]}
+							colors={[theme.colors.accent.amber, "#d97706"]}
 							start={{ x: 0, y: 0 }}
 							end={{ x: 1, y: 1 }}
 							style={styles.iconContainer}
 						>
-							<Ionicons name="language" size={24} color="white" />
+							<Ionicons name="language" size={24} color={theme.colors.white} />
 						</LinearGradient>
 						<View style={styles.detailContent}>
 							<Text style={styles.detailLabel}>Languages</Text>
@@ -168,12 +165,12 @@ export default function CountryDetailsScreen() {
 						entering={FadeInDown.delay(800).springify()}
 					>
 						<LinearGradient
-							colors={["#6366F1", "#4F46E5"]}
+							colors={[theme.colors.accent.indigo, "#4f46e5"]}
 							start={{ x: 0, y: 0 }}
 							end={{ x: 1, y: 1 }}
 							style={styles.iconContainer}
 						>
-							<Ionicons name="globe" size={24} color="white" />
+							<Ionicons name="globe" size={24} color={theme.colors.white} />
 						</LinearGradient>
 						<View style={styles.detailContent}>
 							<Text style={styles.detailLabel}>Region</Text>
@@ -227,7 +224,7 @@ const styles = StyleSheet.create((theme) => ({
 		marginTop: theme.spacing.sm,
 		width: 40,
 		height: 40,
-		backgroundColor: "rgba(255, 255, 255, 0.2)",
+		backgroundColor: theme.colors.overlay.light,
 		borderRadius: theme.borderRadius.xl,
 		alignItems: "center",
 		justifyContent: "center",
@@ -245,9 +242,9 @@ const styles = StyleSheet.create((theme) => ({
 	countryName: {
 		fontSize: theme.typography.fontSize["2xl"],
 		fontWeight: theme.typography.fontWeight.bold,
-		color: "white",
+		color: theme.colors.white,
 		marginBottom: theme.spacing.sm,
-		textShadowColor: "rgba(0, 0, 0, 0.75)",
+		textShadowColor: theme.colors.overlay.dark,
 		textShadowOffset: { width: 0, height: 2 },
 		textShadowRadius: 8,
 	},
@@ -259,8 +256,8 @@ const styles = StyleSheet.create((theme) => ({
 	},
 	capitalText: {
 		fontSize: theme.typography.fontSize.base,
-		color: "rgba(255, 255, 255, 0.9)",
-		textShadowColor: "rgba(0, 0, 0, 0.75)",
+		color: theme.colors.white,
+		textShadowColor: theme.colors.overlay.dark,
 		textShadowOffset: { width: 0, height: 1 },
 		textShadowRadius: 4,
 	},

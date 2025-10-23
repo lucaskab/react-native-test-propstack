@@ -141,106 +141,38 @@ jest.mock("react-native-reanimated", () => {
 	};
 });
 
-// Mock react-native-unistyles
-const createMockTheme = () => ({
-	spacing: {
-		xs: 4,
-		sm: 8,
-		md: 12,
-		lg: 16,
-		xl: 24,
-		"2xl": 32,
-	},
-	borderRadius: {
-		sm: 4,
-		md: 8,
-		lg: 12,
-		xl: 16,
-		full: 9999,
-	},
-	typography: {
-		fontSize: {
-			xs: 10,
-			sm: 12,
-			base: 14,
-			lg: 16,
-			xl: 20,
-			"2xl": 24,
-		},
-		fontWeight: {
-			normal: "400",
-			medium: "500",
-			semibold: "600",
-			bold: "700",
-		},
-	},
-	colors: {
-		text: {
-			primary: "#000",
-			secondary: "#666",
-			tertiary: "#999",
-		},
-		card: {
-			background: "#fff",
-		},
-		background: {
-			primary: "#fff",
-			secondary: "#f5f5f5",
-			tertiary: "#e5e5e5",
-		},
-		border: {
-			primary: "#e5e5e5",
-		},
-		accent: {
-			primary: "#4f46e5",
-			secondary: "#8b5cf6",
-			indigo: "#4f46e5",
-		},
-		badge: {
-			background: "#e0e7ff",
-			text: "#4f46e5",
-		},
-		gradient: {
-			start: "#f0f9ff",
-			middle: "#fef3c7",
-			end: "#fce7f3",
-		},
-	},
-	shadows: {
-		sm: {},
-		card: {},
-		flag: {},
-	},
-});
+jest.mock("react-native-unistyles", () => {
+	const { lightTheme } = require("./src/styles/theme");
 
-jest.mock("react-native-unistyles", () => ({
-	StyleSheet: {
-		create: (styles) => {
-			if (typeof styles === "function") {
-				const mockRuntime = {
-					themeName: "light",
-					colorScheme: "light",
-				};
-				return styles(createMockTheme(), mockRuntime);
-			}
-			return styles;
+	return {
+		StyleSheet: {
+			create: (styles) => {
+				if (typeof styles === "function") {
+					const mockRuntime = {
+						themeName: "light",
+						colorScheme: "light",
+					};
+					return styles(lightTheme, mockRuntime);
+				}
+				return styles;
+			},
 		},
-	},
-	useUnistyles: () => ({
-		theme: createMockTheme(),
-		breakpoint: "md",
-		rt: {
-			themeName: "light",
-			colorScheme: "light",
+		useUnistyles: () => ({
+			theme: lightTheme,
+			breakpoint: "md",
+			rt: {
+				themeName: "light",
+				colorScheme: "light",
+			},
+		}),
+		createStyleSheet: (styles) => styles,
+		UnistylesRegistry: {
+			addThemes: jest.fn(),
+			addBreakpoints: jest.fn(),
+			addConfig: jest.fn(),
 		},
-	}),
-	createStyleSheet: (styles) => styles,
-	UnistylesRegistry: {
-		addThemes: jest.fn(),
-		addBreakpoints: jest.fn(),
-		addConfig: jest.fn(),
-	},
-}));
+	};
+});
 
 // Mock react-native-gesture-handler
 jest.mock("react-native-gesture-handler", () => {

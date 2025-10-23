@@ -10,7 +10,7 @@ import Animated, {
 	withRepeat,
 	withTiming,
 } from "react-native-reanimated";
-import { StyleSheet } from "react-native-unistyles";
+import { StyleSheet, useUnistyles } from "react-native-unistyles";
 
 interface ErrorStateProps {
 	onRetry: () => void;
@@ -23,6 +23,7 @@ export function ErrorState({
 	message = "Oops! Something went wrong",
 	submessage = "Failed to load countries",
 }: ErrorStateProps) {
+	const { theme } = useUnistyles();
 	const ring1Scale = useSharedValue(1);
 	const ring1Opacity = useSharedValue(0.5);
 	const ring2Scale = useSharedValue(1);
@@ -78,7 +79,7 @@ export function ErrorState({
 
 	return (
 		<LinearGradient
-			colors={["#FEF2F2", "#FFF7ED", "#FDF2F8"]}
+			colors={["#fef2f2", "#fff7ed", "#fdf2f8"]}
 			start={{ x: 0, y: 0 }}
 			end={{ x: 1, y: 1 }}
 			style={styles.container}
@@ -91,18 +92,30 @@ export function ErrorState({
 
 					<View style={[styles.iconWrapper]}>
 						<LinearGradient
-							colors={["#EF4444", "#F97316", "#EC4899"]}
+							colors={[
+								theme.colors.accent.red,
+								theme.colors.accent.orange,
+								theme.colors.accent.pink,
+							]}
 							start={{ x: 0, y: 0 }}
 							end={{ x: 1, y: 1 }}
 							style={styles.iconGradient}
 						>
-							<Ionicons name="wifi-outline" size={48} color="white" />
+							<Ionicons
+								name="wifi-outline"
+								size={48}
+								color={theme.colors.white}
+							/>
 						</LinearGradient>
 					</View>
 
 					<View style={[styles.badge]}>
 						<View style={styles.badgeInner}>
-							<Ionicons name="alert-circle" size={24} color="#EF4444" />
+							<Ionicons
+								name="alert-circle"
+								size={24}
+								color={theme.colors.accent.red}
+							/>
 						</View>
 					</View>
 				</View>
@@ -122,7 +135,11 @@ export function ErrorState({
 						activeOpacity={0.6}
 					>
 						<LinearGradient
-							colors={["#EF4444", "#F97316", "#EC4899"]}
+							colors={[
+								theme.colors.accent.red,
+								theme.colors.accent.orange,
+								theme.colors.accent.pink,
+							]}
 							start={{ x: 0, y: 0 }}
 							end={{ x: 1, y: 0 }}
 							style={styles.buttonGradient}
@@ -130,7 +147,7 @@ export function ErrorState({
 							<Ionicons
 								name="refresh"
 								size={20}
-								color="white"
+								color={theme.colors.white}
 								style={styles.buttonIcon}
 							/>
 							<Text style={styles.buttonText}>Try Again</Text>
@@ -168,11 +185,7 @@ const styles = StyleSheet.create((theme) => ({
 		borderRadius: 24,
 		alignItems: "center",
 		justifyContent: "center",
-		shadowColor: "#000",
-		shadowOffset: { width: 0, height: 4 },
-		shadowOpacity: 0.3,
-		shadowRadius: 12,
-		elevation: 8,
+		...theme.shadows.lg,
 	},
 	badge: {
 		position: "absolute",
@@ -184,15 +197,11 @@ const styles = StyleSheet.create((theme) => ({
 	badgeInner: {
 		width: "100%",
 		height: "100%",
-		backgroundColor: "white",
+		backgroundColor: theme.colors.white,
 		borderRadius: 20,
 		alignItems: "center",
 		justifyContent: "center",
-		shadowColor: "#000",
-		shadowOffset: { width: 0, height: 2 },
-		shadowOpacity: 0.2,
-		shadowRadius: 8,
-		elevation: 4,
+		...theme.shadows.md,
 	},
 	ring: {
 		position: "absolute",
@@ -202,7 +211,7 @@ const styles = StyleSheet.create((theme) => ({
 		bottom: 0,
 		borderRadius: 24,
 		borderWidth: 2,
-		borderColor: "#FCA5A5",
+		borderColor: "#fca5a5",
 	},
 	textContainer: {
 		alignItems: "center",
@@ -218,13 +227,13 @@ const styles = StyleSheet.create((theme) => ({
 	},
 	subtitle: {
 		fontSize: theme.typography.fontSize.base,
-		color: "#4B5563",
+		color: theme.colors.text.secondary,
 		marginBottom: theme.spacing.xs,
 		textAlign: "center",
 	},
 	description: {
 		fontSize: theme.typography.fontSize.sm,
-		color: "#6B7280",
+		color: theme.colors.text.secondary,
 		textAlign: "center",
 	},
 	buttonWrapper: {
@@ -236,11 +245,7 @@ const styles = StyleSheet.create((theme) => ({
 		width: "100%",
 		borderRadius: theme.borderRadius.xl,
 		overflow: "hidden",
-		shadowColor: "#000",
-		shadowOffset: { width: 0, height: 4 },
-		shadowOpacity: 0.2,
-		shadowRadius: 8,
-		elevation: 4,
+		...theme.shadows.md,
 	},
 	buttonGradient: {
 		flexDirection: "row",
@@ -256,7 +261,7 @@ const styles = StyleSheet.create((theme) => ({
 	buttonText: {
 		fontSize: theme.typography.fontSize.base,
 		fontWeight: theme.typography.fontWeight.semibold,
-		color: "white",
+		color: theme.colors.white,
 	},
 	cardsContainer: {
 		width: "100%",

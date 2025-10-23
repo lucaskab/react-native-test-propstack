@@ -7,6 +7,7 @@ import { Pressable, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet, useUnistyles } from "react-native-unistyles";
 import { CountryListItem } from "@/components/country-list-item";
+import { EmptyState } from "@/components/empty-state";
 import { ErrorState } from "@/components/error-state";
 import { LoadingState } from "@/components/loading-state";
 import { useCountries } from "@/hooks/use-countries";
@@ -14,7 +15,7 @@ import { useCountries } from "@/hooks/use-countries";
 export default function HomeScreen() {
 	const { data, isLoading, error, refetch } = useCountries();
 	const [searchQuery, setSearchQuery] = useState("");
-	const { theme, rt: runtime } = useUnistyles();
+	const { theme } = useUnistyles();
 
 	if (isLoading) {
 		return <LoadingState />;
@@ -23,7 +24,7 @@ export default function HomeScreen() {
 	if (error || !data) {
 		return (
 			<ErrorState
-				onRetry={() => refetch()}
+				onRetry={refetch}
 				message="Failed to load countries"
 				submessage="Unable to fetch the list of countries"
 			/>
@@ -68,17 +69,11 @@ export default function HomeScreen() {
 				end={{ x: 1, y: 1 }}
 				style={styles.container}
 			>
-				<BlurView
-					intensity={80}
-					tint={runtime.themeName === "dark" ? "dark" : "light"}
-				>
+				<BlurView intensity={80} tint={"light"}>
 					<View style={styles.headerContainer}>
 						<View style={styles.headerContent}>
 							<LinearGradient
-								colors={[
-									theme.colors.accent.primary,
-									theme.colors.accent.secondary,
-								]}
+								colors={[theme.colors.accent.blue, theme.colors.accent.indigo]}
 								start={{ x: 0, y: 0 }}
 								end={{ x: 1, y: 1 }}
 								style={styles.globeIcon}
@@ -88,7 +83,7 @@ export default function HomeScreen() {
 
 							<View style={styles.titleSection}>
 								<Text style={styles.title}>Countries</Text>
-								<Text style={styles.subtitle}>Explore the world</Text>
+								<Text style={styles.subtitle}>Explore Europe</Text>
 							</View>
 
 							<View style={styles.badge}>
@@ -134,34 +129,11 @@ export default function HomeScreen() {
 				<View style={styles.listContainer}>
 					<FlashList
 						data={filteredCountries}
-						renderItem={({ item, index }) => (
-							<CountryListItem item={item} index={index} />
-						)}
+						renderItem={({ item }) => <CountryListItem item={item} />}
 						keyExtractor={(item) => item.name.official}
 						contentContainerStyle={styles.listContent}
 						ListEmptyComponent={() => (
-							<View style={styles.emptyContainer}>
-								<LinearGradient
-									colors={[
-										theme.colors.background.tertiary,
-										theme.colors.border.primary,
-									]}
-									start={{ x: 0, y: 0 }}
-									end={{ x: 1, y: 1 }}
-									style={styles.emptyIcon}
-								>
-									<Ionicons
-										name="search"
-										size={32}
-										color={theme.colors.text.tertiary}
-									/>
-								</LinearGradient>
-
-								<Text style={styles.emptyTitle}>No countries found</Text>
-								<Text style={styles.emptySubtitle}>
-									Try a different search term
-								</Text>
-							</View>
+							<EmptyState onSelectSuggestion={setSearchQuery} />
 						)}
 					/>
 				</View>
@@ -170,7 +142,7 @@ export default function HomeScreen() {
 	);
 }
 
-const styles = StyleSheet.create((theme, rt) => ({
+const styles = StyleSheet.create((theme) => ({
 	container: {
 		flex: 1,
 	},
@@ -183,15 +155,9 @@ const styles = StyleSheet.create((theme, rt) => ({
 	headerContainer: {
 		paddingHorizontal: theme.spacing.lg,
 		paddingVertical: theme.spacing["2xl"],
-		backgroundColor:
-			rt.themeName === "dark"
-				? "rgba(31, 41, 55, 0.8)"
-				: "rgba(255, 255, 255, 0.8)",
+		backgroundColor: "rgba(255, 255, 255, 0.8)",
 		borderBottomWidth: 1,
-		borderBottomColor:
-			rt.themeName === "dark"
-				? "rgba(55, 65, 81, 0.5)"
-				: "rgba(229, 231, 235, 0.5)",
+		borderBottomColor: "rgba(229, 231, 235, 0.5)",
 	},
 	headerContent: {
 		flexDirection: "row",
@@ -266,30 +232,5 @@ const styles = StyleSheet.create((theme, rt) => ({
 	listContent: {
 		paddingBottom: theme.spacing.lg,
 		paddingTop: theme.spacing.lg,
-	},
-	emptyContainer: {
-		alignItems: "center",
-		justifyContent: "center",
-		paddingVertical: 64,
-		paddingHorizontal: theme.spacing.lg,
-		minHeight: 300,
-	},
-	emptyIcon: {
-		width: 80,
-		height: 80,
-		borderRadius: theme.borderRadius.full,
-		alignItems: "center",
-		justifyContent: "center",
-		marginBottom: theme.spacing.lg,
-	},
-	emptyTitle: {
-		fontSize: theme.typography.fontSize.base,
-		fontWeight: theme.typography.fontWeight.semibold,
-		color: theme.colors.text.primary,
-		marginBottom: theme.spacing.xs,
-	},
-	emptySubtitle: {
-		fontSize: theme.typography.fontSize.sm,
-		color: theme.colors.text.secondary,
 	},
 }));

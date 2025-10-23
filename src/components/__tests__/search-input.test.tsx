@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react-native";
+import { lightTheme } from "@/styles/theme";
 import { SearchInput } from "../search-input";
 
 describe("SearchInput", () => {
@@ -111,15 +112,15 @@ describe("SearchInput", () => {
 		const input = screen.getByPlaceholderText("Search...");
 		const searchIcon = screen.getByTestId("search-icon");
 
-		expect(searchIcon.props.color).toBe("#666");
+		expect(searchIcon.props.color).toBe(lightTheme.colors.text.secondary);
 
 		fireEvent(input, "focus");
 
-		expect(searchIcon.props.color).toBe("#4f46e5");
+		expect(searchIcon.props.color).toBe(lightTheme.colors.accent.blue);
 
 		fireEvent(input, "blur");
 
-		expect(searchIcon.props.color).toBe("#666");
+		expect(searchIcon.props.color).toBe(lightTheme.colors.text.secondary);
 	});
 
 	it("applies focused styles to container when input is focused", () => {
@@ -130,7 +131,7 @@ describe("SearchInput", () => {
 
 		expect(container.props.style).toContainEqual(
 			expect.objectContaining({
-				borderColor: "#e5e5e5",
+				borderColor: lightTheme.colors.border.primary,
 			}),
 		);
 
@@ -138,7 +139,7 @@ describe("SearchInput", () => {
 
 		expect(container.props.style).toContainEqual(
 			expect.objectContaining({
-				borderColor: "#4f46e5",
+				borderColor: lightTheme.colors.accent.blue,
 			}),
 		);
 
@@ -146,7 +147,7 @@ describe("SearchInput", () => {
 
 		expect(container.props.style).toContainEqual(
 			expect.objectContaining({
-				borderColor: "#e5e5e5",
+				borderColor: lightTheme.colors.border.primary,
 			}),
 		);
 	});

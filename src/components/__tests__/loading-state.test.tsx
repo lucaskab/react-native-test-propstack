@@ -48,11 +48,9 @@ describe("LoadingState", () => {
 	it("renders skeleton cards", () => {
 		render(<LoadingState />);
 
-		// The component renders exactly 4 skeleton cards to show loading state
 		const skeletonCards = screen.getAllByTestId("skeleton-card");
 		expect(skeletonCards).toHaveLength(4);
 
-		// Verify the overall loading state structure
 		expect(screen.getByText("Loading Countries")).toBeTruthy();
 		expect(screen.getByTestId("icon-globe-outline")).toBeTruthy();
 	});
@@ -77,12 +75,10 @@ describe("LoadingState", () => {
 	it("maintains structure after multiple renders", () => {
 		const { rerender } = render(<LoadingState />);
 
-		// First render
 		expect(screen.getByText("Loading Countries")).toBeTruthy();
 		expect(screen.getByTestId("icon-globe-outline")).toBeTruthy();
 		expect(screen.getAllByTestId("skeleton-card")).toHaveLength(4);
 
-		// Re-render with same props
 		rerender(<LoadingState />);
 
 		expect(screen.getByText("Loading Countries")).toBeTruthy();
@@ -93,19 +89,15 @@ describe("LoadingState", () => {
 	it("displays all required UI elements", () => {
 		render(<LoadingState />);
 
-		// Title and subtitle
 		expect(screen.getByText("Loading Countries")).toBeTruthy();
 		expect(
 			screen.getByText("Fetching data from around the world"),
 		).toBeTruthy();
 
-		// Animated dots
 		expect(screen.getByText("...")).toBeTruthy();
 
-		// Globe icon
 		expect(screen.getByTestId("icon-globe-outline")).toBeTruthy();
 
-		// Skeleton cards
 		expect(screen.getAllByTestId("skeleton-card")).toHaveLength(4);
 	});
 });

@@ -7,7 +7,6 @@ import type { Country } from "@/@types/countries";
 
 interface CountryListItemProps {
 	item: Country;
-	index: number;
 }
 
 export function CountryListItem({ item }: CountryListItemProps) {
@@ -18,12 +17,10 @@ export function CountryListItem({ item }: CountryListItemProps) {
 			<Link href={`/country-details?name=${item.name.common}`} asChild>
 				<Pressable style={styles.card}>
 					<View style={styles.content}>
-						{/* Flag Image */}
 						<View style={styles.flagContainer}>
 							<Image source={{ uri: item.flags.png }} style={styles.flag} />
 						</View>
 
-						{/* Country Info */}
 						<View style={styles.info}>
 							<Text style={styles.name}>{item.name.common}</Text>
 							{item.capital.length > 0 && (
@@ -39,7 +36,6 @@ export function CountryListItem({ item }: CountryListItemProps) {
 							)}
 						</View>
 
-						{/* Chevron Icon */}
 						<View style={styles.chevronContainer}>
 							<Ionicons
 								name="chevron-forward"
@@ -103,7 +99,7 @@ const styles = StyleSheet.create((theme) => ({
 		height: 32,
 		backgroundColor: theme.colors.background.tertiary,
 		borderRadius: theme.borderRadius.full,
-		alignItems: "center" as const,
-		justifyContent: "center" as const,
+		alignItems: "center",
+		justifyContent: "center",
 	},
 }));

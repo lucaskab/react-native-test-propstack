@@ -23,20 +23,17 @@ export function LoadingState({
 }: LoadingStateProps) {
 	const { theme } = useUnistyles();
 
-	// Animations
 	const globeRotation = useSharedValue(0);
 	const globeScale = useSharedValue(1);
 	const ringRotation = useSharedValue(0);
 	const dotsOpacity = useSharedValue(0);
 
 	useEffect(() => {
-		// Globe rotation
 		globeRotation.value = withRepeat(
 			withTiming(360, { duration: 3000, easing: Easing.linear }),
 			-1,
 		);
 
-		// Globe scale pulse
 		globeScale.value = withRepeat(
 			withSequence(
 				withTiming(1.1, { duration: 1000, easing: Easing.inOut(Easing.ease) }),
@@ -45,13 +42,11 @@ export function LoadingState({
 			-1,
 		);
 
-		// Ring rotation (opposite direction)
 		ringRotation.value = withRepeat(
 			withTiming(-360, { duration: 4000, easing: Easing.linear }),
 			-1,
 		);
 
-		// Dots opacity animation
 		dotsOpacity.value = withRepeat(
 			withSequence(
 				withTiming(0, { duration: 500 }),
@@ -89,17 +84,21 @@ export function LoadingState({
 					<Animated.View style={[styles.globeWrapper, globeAnimatedStyle]}>
 						<LinearGradient
 							colors={[
-								theme.colors.accent.primary,
-								theme.colors.accent.secondary,
-								"#9333EA",
+								theme.colors.accent.blue,
+								theme.colors.accent.indigo,
+								theme.colors.accent.purple,
 							]}
 							start={{ x: 0, y: 0 }}
 							end={{ x: 1, y: 1 }}
 							style={styles.globeGradient}
-						>
-							<Ionicons name="globe-outline" size={48} color="white" />
-						</LinearGradient>
+						></LinearGradient>
 					</Animated.View>
+					<Ionicons
+						name="globe-outline"
+						size={48}
+						color={theme.colors.white}
+						style={styles.globeIcon}
+					/>
 				</View>
 
 				<View style={styles.textContainer}>
@@ -170,10 +169,7 @@ function SkeletonCard() {
 		<View style={styles.skeletonCard} testID="skeleton-card">
 			<Animated.View style={[styles.skeletonFlag, flagAnimatedStyle]}>
 				<LinearGradient
-					colors={[
-						theme.colors.border.primary,
-						theme.colors.background.tertiary,
-					]}
+					colors={[theme.colors.skeleton.start, theme.colors.skeleton.end]}
 					start={{ x: 0, y: 0 }}
 					end={{ x: 1, y: 1 }}
 					style={styles.skeletonFlagGradient}
@@ -183,10 +179,7 @@ function SkeletonCard() {
 			<View style={styles.skeletonTextContainer}>
 				<Animated.View style={[styles.skeletonTitle, title1AnimatedStyle]}>
 					<LinearGradient
-						colors={[
-							theme.colors.border.primary,
-							theme.colors.background.tertiary,
-						]}
+						colors={[theme.colors.skeleton.start, theme.colors.skeleton.end]}
 						start={{ x: 0, y: 0 }}
 						end={{ x: 1, y: 0 }}
 						style={styles.skeletonTitleGradient}
@@ -194,10 +187,7 @@ function SkeletonCard() {
 				</Animated.View>
 				<Animated.View style={[styles.skeletonSubtitle, title2AnimatedStyle]}>
 					<LinearGradient
-						colors={[
-							theme.colors.border.primary,
-							theme.colors.background.tertiary,
-						]}
+						colors={[theme.colors.skeleton.start, theme.colors.skeleton.end]}
 						start={{ x: 0, y: 0 }}
 						end={{ x: 1, y: 0 }}
 						style={styles.skeletonSubtitleGradient}
@@ -234,11 +224,13 @@ const styles = StyleSheet.create((theme) => ({
 		borderRadius: 24,
 		alignItems: "center",
 		justifyContent: "center",
-		shadowColor: "#000",
-		shadowOffset: { width: 0, height: 4 },
-		shadowOpacity: 0.3,
-		shadowRadius: 12,
-		elevation: 8,
+		...theme.shadows.lg,
+	},
+	globeIcon: {
+		position: "absolute",
+		alignSelf: "center",
+		top: "50%",
+		marginTop: -24,
 	},
 	textContainer: {
 		alignItems: "center",
@@ -270,11 +262,11 @@ const styles = StyleSheet.create((theme) => ({
 		marginBottom: theme.spacing.xl * 1.5,
 	},
 	skeletonCard: {
-		backgroundColor: "rgba(255, 255, 255, 0.6)",
+		backgroundColor: theme.colors.overlay.subtle,
 		borderRadius: theme.borderRadius.xl,
 		padding: theme.spacing.lg,
 		borderWidth: 1,
-		borderColor: "rgba(229, 231, 235, 0.5)",
+		borderColor: theme.colors.border.primary,
 		flexDirection: "row",
 		alignItems: "center",
 		gap: theme.spacing.lg,

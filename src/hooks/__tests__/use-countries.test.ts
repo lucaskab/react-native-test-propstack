@@ -8,15 +8,8 @@ import {
 import { api } from "@/services/api";
 import { getCountries } from "../use-countries";
 
-jest.mock("@/services/api", () => ({
-	api: {
-		get: jest.fn(),
-	},
-}));
-
 const mockApi = api as jest.Mocked<typeof api>;
 
-// Unmock react-query for these tests so useQuery actually works
 jest.unmock("@tanstack/react-query");
 
 describe("use-countries", () => {
